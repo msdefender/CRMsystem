@@ -70,28 +70,37 @@ class RoleAssign extends Controller
         return redirect()->route('assignrole.index');
     }
 
-    // NOT DONE
+
+   // NOT DONE
     public function destroy($id)
     {
+      
         $user = User::findOrFail($id);
         
-        // $user->removeRole('writer');
-        // $user->syncRoles(['writer', 'admin']);
+        $user->removeRole('writer');
+        $user->syncRoles(['writer', 'admin']);
 
-        // if ($user->delete()) {
+        if ($user->delete()) {
 
-        //     if($user->profile_picture != 'avatar.png') {
+            if($user->profile_picture != 'avatar.png') {
 
-        //         $image_path = public_path() . '/images/profile/' . $user->profile_picture;
+                $image_path = public_path() . '/images/profile/' . $user->profile_picture;
 
-        //         if (is_file($image_path) && file_exists($image_path)) {
+                if (is_file($image_path) && file_exists($image_path)) {
 
-        //             unlink($image_path);
-        //         }
-        //     }
+                    unlink($image_path);
+                }
+            }
             
-        // }
+        }
 
-        return back();
+        return redirect()->back();
+    }
+    public function show($id)
+    {
+        $user = User::findOrFail($id);
+        $user->delete();
+       
+        return redirect()->back();
     }
 }

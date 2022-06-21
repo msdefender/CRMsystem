@@ -5,7 +5,7 @@
 
         <div class="flex items-center justify-between mb-6">
             <div>
-                <h2 class="text-gray-700 uppercase font-bold">Create Parent</h2>
+                <h2 class="text-gray-700 uppercase font-bold">Create Customers</h2>
             </div>
             <div class="flex flex-wrap items-center">
                 <a href="{{ route('parents.index') }}" class="bg-gray-200 text-gray-700 text-sm uppercase py-2 px-4 flex items-center rounded">

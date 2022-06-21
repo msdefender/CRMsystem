@@ -47,7 +47,14 @@ Route::group(['middleware' => ['auth','role:Admin']], function ()
     Route::resource('parents', 'ParentsController');
     Route::resource('student', 'StudentController');
     Route::get('attendance', 'AttendanceController@index')->name('attendance.index');
-
+    // added
+    Route::resource('products', 'ProductsController');
+    Route::resource('leads', 'LeadsController');
+    Route::resource('units', 'UnitsController');
+    Route::resource('customers', 'CustomersController');
+    Route::resource('orders', 'OrdersController');
+    Route::resource('agreements', 'AgreementsController');
+    Route::resource('agreementsF', 'AgreementsFController');
 });
 
 Route::group(['middleware' => ['auth','role:Teacher']], function () 

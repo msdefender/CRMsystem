@@ -19,15 +19,15 @@
         @include('dashboard.admin')
     @endrole
 
-    @role('Parent')
+    @role('Customer')
         @include('dashboard.parents')
     @endrole
 
-    @role('Teacher')
+    @role('User')
         @include('dashboard.teacher')
     @endrole
 
-    @role('Student')
+    @role('Other')
         @include('dashboard.student')
     @endrole
 
