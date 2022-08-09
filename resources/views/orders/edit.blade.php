@@ -16,88 +16,87 @@
         </div>
 
         <div class="table w-full mt-8 bg-white rounded">
-            <form action="{{ route('customers.update',$product->id) }}" method="POST" class="w-full max-w-xl px-6 py-12" enctype="multipart/form-data">
+            <form action="{{ route('orders.update',$product->id) }}" method="POST" class="w-full max-w-xl px-6 py-12" enctype="multipart/form-data">
                 @csrf
                 @method('PUT')
 
                 <div class="md:flex md:items-center mb-6">
-                    <div class="md:w-1/3"></div>
-                    <div class="md:w-2/3">
-                        <img class="w-20 h-20 sm:w-32 sm:h-32 rounded" src="/image/{{ $product->image }}" alt="avatar">
-                    </div>
-                </div>
-                <div class="md:flex md:items-center mb-6">
                     <div class="md:w-1/3">
-                        <label class="block text-gray-500 font-bold md:text-right mb-1 md:mb-0 pr-4">
-                            Title
+                        <label class="block text-gray-500 font-bold md:text-right mb-1 md:mb-0 pr-4" for="inline-full-name">
+                            Status
                         </label>
                     </div>
                     <div class="md:w-2/3">
-                        <input name="title" class="bg-gray-200 appearance-none border-2 border-gray-200 rounded w-full py-2 px-4 text-gray-700 leading-tight focus:outline-none focus:bg-white focus:border-blue-500" type="text" value="{{ $product->title }}">
-                        @error('name')
-                            <p class="text-red-500 text-xs italic">{{ $message }}</p>
-                        @enderror
+                            <div class="flex flex-row items-center">
+                                <select class="bg-gray-200 appearance-none border-2 border-gray-200 rounded w-full py-2 px-4 text-gray-700 leading-tight focus:outline-none focus:bg-white focus:border-blue-500" name='status' >
+                                    <option>{{$product->status}}</option>
+                                    <option>new</option>
+                                    <option>peding</option> 
+                                    <option>preparing</option>
+                                    <option>delivering</option>
+                                    <option>accepted</option>
+                                    <option>declined</option>
+                                    <option>archived</option>
+                                </select>   
+                            
+                            </div>
                     </div>
+
                 </div>
                 <div class="md:flex md:items-center mb-6">
                     <div class="md:w-1/3">
-                        <label class="block text-gray-500 font-bold md:text-right mb-1 md:mb-0 pr-4">
-                            First Name
+                        <label class="block text-gray-500 font-bold md:text-right mb-1 md:mb-0 pr-4" for="inline-full-name">
+                            Payments
                         </label>
                     </div>
                     <div class="md:w-2/3">
-                        <input name="firstname" class="bg-gray-200 appearance-none border-2 border-gray-200 rounded w-full py-2 px-4 text-gray-700 leading-tight focus:outline-none focus:bg-white focus:border-blue-500" type="text" value="{{ $product->firstname }}">
-                        @error('name')
-                            <p class="text-red-500 text-xs italic">{{ $message }}</p>
-                        @enderror
+                            <div class="flex flex-row items-center">
+                                <select class="bg-gray-200 appearance-none border-2 border-gray-200 rounded w-full py-2 px-4 text-gray-700 leading-tight focus:outline-none focus:bg-white focus:border-blue-500" name="payments" >
+                                    <option>{{$product->payments}}</option>
+                                    <option>Cash</option>
+                                    <option>Card</option>
+                                    <option>Transfer</option>
+                                </select>   
+                            
+                            </div>
                     </div>
+
                 </div>
+              
                 <div class="md:flex md:items-center mb-6">
                     <div class="md:w-1/3">
-                        <label class="block text-gray-500 font-bold md:text-right mb-1 md:mb-0 pr-4">
-                            Last name
-            
+                        <label class="block text-gray-500 font-bold md:text-right mb-1 md:mb-0 pr-4" for="inline-full-name">
+                           Has Agreements
                         </label>
                     </div>
                     <div class="md:w-2/3">
-                    <input name="lastname" class="bg-gray-200 appearance-none border-2 border-gray-200 rounded w-full py-2 px-4 text-gray-700 leading-tight focus:outline-none focus:bg-white focus:border-blue-500" type="text" value="{{ $product->lastname }}">
-                      
+                            <div class="flex flex-row items-center">
+                                <select class="bg-gray-200 appearance-none border-2 border-gray-200 rounded w-full py-2 px-4 text-gray-700 leading-tight focus:outline-none focus:bg-white focus:border-blue-500" name='has_agreements' >
+                                    <option>{{$product->has_agreements}}</option>
+                                   <option>Yes</option>
+                                   <option>No</option>
+                                </select>   
+                            
+                            </div>
                     </div>
-                </div>
-                <div class="md:flex md:items-center mb-6">
-                    <div class="md:w-1/3">
-                        <label class="block text-gray-500 font-bold md:text-right mb-1 md:mb-0 pr-4">
-                            Email
-                        </label>
-                    </div>
-                    <div class="md:w-2/3">
-                        <input name="email" class="bg-gray-200 appearance-none border-2 border-gray-200 rounded w-full py-2 px-4 text-gray-700 leading-tight focus:outline-none focus:bg-white focus:border-blue-500" type="text" value="{{ $product->email }}">
-                    
-                    </div>
+
                 </div>
                 
+          
                 <div class="md:flex md:items-center mb-6">
-                    <div class="md:w-1/3">
-                        <label class="block text-gray-500 font-bold md:text-right mb-1 md:mb-0 pr-4">
+                    <div class="md:w-1/2">
+                        <label class="block text-gray-500 font-bold md:text-right mb-1 md:mb-0 pr-4" for="inline-full-name">
                             Phone
                         </label>
                     </div>
-                    <div class="md:w-2/3">
-                        <input name="phone" class="bg-gray-200 appearance-none border-2 border-gray-200 rounded w-full py-2 px-4 text-gray-700 leading-tight focus:outline-none focus:bg-white focus:border-blue-500" type="text" value="{{ $product->phone }}">
-                    
-                    </div>
+                    <select class="bg-gray-200 appearance-none border-2 border-gray-200 rounded w-full py-2 px-4 text-gray-700 leading-tight focus:outline-none focus:bg-white focus:border-blue-500" name="customer_id" >
+                    <option value="{{$custo->id}}">{{$custo->phone}}</option>
+                            @foreach($customers as $customer)
+                            <option value="{{$customer->id}}">{{$customer->phone}}</option>
+                            @endforeach
+                         </select>   
                 </div>
-                                 
-                <div class="md:flex md:items-center mb-6">
-                    <div class="md:w-1/3">
-                        <label class="block text-gray-500 font-bold md:text-right mb-1 md:mb-0 pr-4">
-                            Image:
-                        </label>
-                    </div>
-                    <div class="md:w-2/3">
-                        <input name="image" class="bg-gray-200 appearance-none border-2 border-gray-200 rounded w-full py-2 px-4 text-gray-700 leading-tight focus:outline-none focus:bg-white focus:border-blue-500" type="file">
-                    </div>
-                </div>
+
 
                 <div class="md:flex md:items-center">
                     <div class="md:w-1/3"></div>

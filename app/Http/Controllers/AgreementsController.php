@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Agreements;
+use App\File;
 use Illuminate\Http\Request;
 
 class AgreementsController extends Controller
@@ -37,13 +38,23 @@ class AgreementsController extends Controller
      */
     public function store(Request $request)
     {
+     //   dd($request);
+      
+        $request->validate([
+        'file' => 'required|file|mimes:doc,docx,csv,xlsx,xls,txt,pdf'
+        ]);
+
+        $fileName = time().'.'.$request->file->extension();  
+        $request->file->move(public_path(), $fileName);
         
-        $input = $request->all();
-      // dd($input)->file_url;
-        Agreements::create($input);
-     
+        Agreements::create([
+            'title' => $request->title,
+            'name' => $fileName,
+            'description' => $request->description
+        ]);
+         
         return redirect()->route('agreements.index');
-    }
+     }
 
     /**
      * Display the specified resource.
@@ -51,9 +62,11 @@ class AgreementsController extends Controller
      * @param  \App\Agreements  $agreements
      * @return \Illuminate\Http\Response
      */
-    public function show(Agreements $agreements)
+    public function show($id)
     {
-        //
+        $user = Agreements::findOrFail($id);
+        $user->delete();
+        return redirect()->back();
     }
 
     /**
@@ -62,10 +75,14 @@ class AgreementsController extends Controller
      * @param  \App\Agreements  $agreements
      * @return \Illuminate\Http\Response
      */
-    public function edit(Agreements $agreements)
+    public function edit($id)
     {
-        $product =  Agreements::latest()->paginate(10);
-        return view('agreements.index',compact('product'));
+       
+            
+        $product =  Agreements::findOrFail($id)->get()[0];
+        
+       
+        return view('agreements.edit',compact('product'));
     }
 
     /**
@@ -77,12 +94,19 @@ class AgreementsController extends Controller
      */
     public function update(Request $request,$id)
     {
-        $product = Agreements::findOrFail($id);
+        //dd($request);
+        $request->validate([
+            'file' => 'required|file|mimes:doc,docx,csv,xlsx,xls,txt,pdf'
+            ]);
+    
+            $fileName = time().'.'.$request->file->extension();  
+            $request->file->move(public_path(), $fileName);
+             $product = Agreements::findOrFail($id);
 
        
         $product->update([
             'title'  => $request->title,
-            'file_url'  => $request->file_url,
+            'name'  => $fileName,
             'description'  => $request->description,
            
             

@@ -86,7 +86,7 @@
                     <div class="md:w-2/3">
                         <div class="flex flex-row items-center">
                         <select class="bg-gray-200 appearance-none border-2 border-gray-200 rounded w-full py-2 px-4 text-gray-700 leading-tight focus:outline-none focus:bg-white focus:border-blue-500" name="unit_id" >
-                            <option> {{ $product->unit->name }}</option>
+                            <option value="{{$product->unit_id}}"> {{ $product->unit->name }}</option>
                             @foreach($units as $unit)
                             <option value="{{$unit->id}}">{{$unit->name}}</option>
                             @endforeach

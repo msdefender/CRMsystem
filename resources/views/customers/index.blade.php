@@ -30,7 +30,7 @@
                     <div class="w-2/12 px-4 py-3 text-sm font-semibold text-gray-600 tracking-tight">{{ $product->name }}{{ $product->lastname }}</div>
                     <div class="w-2/12 px-4 py-3 flex flex-wrap"> {{ $product->email }} </div>
                     <div class="w-2/12 px-4 py-3 flex flex-wrap"> {{ $product->phone }} </div>
-                    <div class="w-2/12 px-4 py-3 flex flex-wrap"><img src="/image/{{ $product->image }}" name="image">  </div>
+                    <div class="w-2/12 px-4 py-3 flex flex-wrap"><img width="100px" height="100px" src="{{ asset('images/profile/' . auth()->user()->profile_picture) }}" name="image">  </div>
                     <div class="w-2/12 flex justify-end px-3">
                         <a  href="{{ route('customers.edit',$product->id) }}">
                             <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-pencil-square" viewBox="0 0 16 16">

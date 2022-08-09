@@ -18,7 +18,7 @@
         <div class="mt-8 bg-white rounded border-b-4 border-gray-300">
             <div class="flex flex-wrap items-center uppercase text-sm font-semibold bg-gray-300 text-gray-600 rounded-tl rounded-tr">
                 <div class="w-2/12 px-4 py-3">Title</div>
-                <div class="w-2/4 px-4 py-3">File url</div>
+                
                 <div class="w-2/12 px-4 py-3">Description</div>
                 <div class="w-2/7 px-4 py-3">Action</div>
                
@@ -26,7 +26,6 @@
             @foreach ($data as $d)
                     <div class="flex flex-wrap items-center text-gray-700 border-t-2 border-l-4 border-r-4 border-gray-300">
                     <div class="w-2/12 px-4 py-3 flex flex-wrap"> {{ $d->title}} </div>    
-                    <div class="w-2/4 px-4 py-3 text-sm font-semibold text-gray-600 tracking-tight">{{ $d->file_url}}</div>
                     <div class="w-2/12 px-4 py-3 flex flex-wrap"> {{ $d->description }} </div>
                 
                     <div class="w-2/8 flex justify-end px-3">

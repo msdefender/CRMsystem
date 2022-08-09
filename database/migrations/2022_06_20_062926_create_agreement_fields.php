@@ -20,6 +20,7 @@ class CreateAgreementFields extends Migration
             $table->string('field_name');
             $table->string('field_value');
             $table->string('input_name');
+            $table->boolean('display');
             $table->timestamps();
         });
     }

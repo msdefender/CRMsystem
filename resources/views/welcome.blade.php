@@ -64,7 +64,7 @@
             }
         </style>
     </head>
-    <body class="bg-gray-100">
+    <body class="bg-gray-100" style="background-image: url('https://securenews.ru/wp-content/uploads/2018/03/online-shopping-ecommerce-ss-1920_1.png'); height: 100%;background-position: center;background-size: cover;">
         <div class="flex-center position-ref full-height">
             @if (Route::has('login'))
                 <div class="top-right links">
@@ -80,20 +80,23 @@
                 </div>
             @endif
 
-            <div class="content">
-                <div class="title m-b-md">
+            <div class="content" >
+            
+        
+            
+            <!-- <div class="title m-b-md">
                     Laravel
                 </div>
 
                 <div class="links">
-                    <a href="https://laravel.com/docs">Docs</a>
-                    <a href="https://laracasts.com">Laracasts</a>
+                    
+                    <a href="https://laracasts.com">La1racasts</a>
                     <a href="https://laravel-news.com">News</a>
                     <a href="https://blog.laravel.com">Blog</a>
                     <a href="https://nova.laravel.com">Nova</a>
                     <a href="https://forge.laravel.com">Forge</a>
                     <a href="https://github.com/laravel/laravel">GitHub</a>
-                </div>
+                </div> -->
             </div>
         </div>
     </body>

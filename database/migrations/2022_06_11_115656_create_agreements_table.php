@@ -16,7 +16,7 @@ class CreateAgreementsTable extends Migration
         Schema::create('agreements', function (Blueprint $table) {
             $table->id();
             $table->string('title');
-            $table->string('file_url');
+            $table->boolean('display');
             $table->text('description');
             $table->timestamps();
         });

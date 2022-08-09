@@ -25,6 +25,13 @@
 
                 <div class="w-2/12 px-4 py-1 text-right">Action</div>
             </div>
+            <?php $sum = 0; ?>
+            @foreach($products as $d)
+             <?php 
+               $sum =$sum + ( $d->price);
+               
+              ?>
+            @endforeach
             @foreach ($products as $product)
                 <div class="flex flex-wrap items-center text-gray-700 border-t-2 border-l-4 border-r-4 border-gray-300">
                     <div class="w-2/12 px-4 py-3 text-sm font-semibold text-gray-600 tracking-tight">{{ $product->name }}</div>
@@ -48,7 +55,9 @@
                     </div>
                 </div>
             @endforeach
+            
         </div>
+        <div class="w-2/6 px-2 py-3" style="display: flex;"> TOTAL: <p id="total" style="margin-left: 320px;">{{$sum}}</p></div>
     </div>
 
 @endsection

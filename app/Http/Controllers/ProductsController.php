@@ -78,6 +78,7 @@ class ProductsController extends Controller
     public function edit($id)
     {
         $product = Products::findOrFail($id);
+      //  dd($product->unit_id);
         $units  = Units::get();
         return view('products.edit',compact('product','units'));
     }
@@ -111,6 +112,7 @@ class ProductsController extends Controller
         return redirect()->route('products.index');
     }
 
+    
  
     
 

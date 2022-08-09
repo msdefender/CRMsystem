@@ -4,7 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Customers;
 use Illuminate\Http\Request;
-
+use Illuminate\Support\Str;
 class CustomersController extends Controller
 {
    /**
@@ -86,12 +86,7 @@ class CustomersController extends Controller
     {
         $product = Customers::findOrFail($id);
 
-        if ($image = $request->file('image')) {
-            $destinationPath = 'image/';
-            $profileImage = date('YmdHis') . "." . $image->getClientOriginalExtension();
-            $image->move($destinationPath, $profileImage);
-            $input['image'] = "$profileImage";
-            }
+       
         $product->update([
             'title'  => $request->title,
             'lastname'  => $request->lastname,
@@ -100,6 +95,21 @@ class CustomersController extends Controller
             'phone' => $request->phone,
             
         ]);
+        if ($image = $request->file('image')) {
+            $destinationPath = 'image/';
+            $profileImage = date('YmdHis') . "." . $image->getClientOriginalExtension();
+            $image->move($destinationPath, $profileImage);
+            $input['image'] = "$profileImage";
+            }
+            if ($request->hasFile('profile_picture')) {
+                $profile = Str::slug($product->name).'-'.$product->id.'.'.$request->profile_picture->getClientOriginalExtension();
+                $request->profile_picture->move(public_path('images/profile'), $profile);
+            } else {
+                $profile = 'avatar.png';
+            }
+            $product->update([
+                'profile_picture' => $profile
+            ]);
 
         
         return redirect()->route('customers.index');

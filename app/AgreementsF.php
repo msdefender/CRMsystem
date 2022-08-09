@@ -14,6 +14,7 @@ class AgreementsF extends Model
         'field_name',
         'field_value',
         'input_name',
+        'display'
        
         
     ];

@@ -3,7 +3,10 @@
 namespace App\Http\Controllers;
 
 use App\Baskets;
+use App\Products;
+use App\Orders;
 use Illuminate\Http\Request;
+use phpDocumentor\Reflection\Types\Null_;
 
 class BasketsController extends Controller
 {
@@ -14,7 +17,8 @@ class BasketsController extends Controller
      */
     public function index()
     {
-        //
+     //  dd($id);
+        return view('orders.see');
     }
 
     /**
@@ -22,9 +26,16 @@ class BasketsController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
-    public function create()
+    public function create(Request $request,$order_id)
     {
-        //
+       
+        Baskets::create([
+        'product_id' =>   $request->product_id,
+        'order_id' =>   $order_id,
+        'quantity' =>   $request->quantity
+        ]);
+        return redirect()->route('see',['order_id' => $order_id]);
+       
     }
 
     /**
@@ -78,8 +89,10 @@ class BasketsController extends Controller
      * @param  \App\Baskets  $baskets
      * @return \Illuminate\Http\Response
      */
-    public function destroy(Baskets $baskets)
+    public function destroy($id,$order_id)
     {
-        //
+            
+        Baskets::findOrFail($id)->delete();
+        return redirect()->route('see',['order_id' => $order_id]);
     }
 }

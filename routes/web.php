@@ -1,5 +1,6 @@
 <?php
-
+use Illuminate\Support\Facades\Route;
+use Illuminate\Support\Facades\Auth;
 /*
 |--------------------------------------------------------------------------
 | Web Routes
@@ -14,6 +15,9 @@
 Route::get('/', function () {
     return redirect('/login');
 });
+
+
+    ;
 
 Auth::routes();
 
@@ -40,34 +44,72 @@ Route::group(['middleware' => ['auth','role:Admin']], function ()
     Route::get('assign-subject-to-class/{id}', 'GradeController@assignSubject')->name('class.assign.subject');
     Route::post('assign-subject-to-class/{id}', 'GradeController@storeAssignedSubject')->name('store.class.assign.subject');
 
-    Route::resource('assignrole', 'RoleAssign');
-    Route::resource('classes', 'GradeController');
-    Route::resource('subject', 'SubjectController');
-    Route::resource('teacher', 'TeacherController');
-    Route::resource('parents', 'ParentsController');
-    Route::resource('student', 'StudentController');
-    Route::get('attendance', 'AttendanceController@index')->name('attendance.index');
-    // added
+   // added
     Route::resource('products', 'ProductsController');
     Route::resource('leads', 'LeadsController');
     Route::resource('units', 'UnitsController');
+    Route::resource('credit', 'CreditController');
     Route::resource('customers', 'CustomersController');
     Route::resource('orders', 'OrdersController');
     Route::resource('agreements', 'AgreementsController');
     Route::resource('agreementsF', 'AgreementsFController');
-});
+    Route::resource('baskets', 'BasketsController');
+    //Route::match(array('GET', 'POST'),'see', 'OrdersController@see')->name('see');
+    Route::get('see/{order_id}', 'OrdersController@see')->name('see');
+    Route::post('create/{order_id}', 'BasketsController@create')->name('create');
+    Route::get('agree/{order_id}', 'OrdersController@agree')->name('agree');
+    Route::get('download/{order_id}', 'OrdersController@download')->name('download');
+    Route::get('autocomplete', 'OrdersController@autocomplete')->name('autocomplete');
+    Route::get('change', 'OrdersController@change')->name('change');
+    Route::get('agg/{id}/{customer_id}/{order_id}', 'OrdersController@agg')->name('agg');
+    Route::post('file', 'OrdersController@file')->name('file');
+    Route::resource('assignrole', 'RoleAssign');
+    Route::get('destroy/{id}/{order_id}', 'BasketsController@destroy')->name('destroy');
 
-Route::group(['middleware' => ['auth','role:Teacher']], function () 
+    Route::any('test','CreditController@test')->name('test');
+    Route::any('test1','CreditController@test1')->name('test1');
+
+
+   
+});
+// PayME
+Route::any('/transfer/by/payme/', [
+    'uses' => "PaymeController@transfer",
+    'as' => "payme.transfer",
+    'middleware' => "payme_auth"
+]);
+
+Route::any('/telegram/bot/doktor_shahlo', [
+    "uses" => "TelegramBot\DoktorShahloBotController@main",
+    "as" => "bot.index"
+]);
+
+
+Route::group(['middleware' => ['auth','role:Admin']], function () 
 {
-    Route::post('attendance', 'AttendanceController@store')->name('teacher.attendance.store');
-    Route::get('attendance-create/{classid}', 'AttendanceController@createByTeacher')->name('teacher.attendance.create');
+    Route::get('/roles-permissions', 'RolePermissionController@roles')->name('roles-permissions');
+    Route::get('/role-create', 'RolePermissionController@createRole')->name('role.create');
+    Route::post('/role-store', 'RolePermissionController@storeRole')->name('role.store');
+    Route::get('/role-edit/{id}', 'RolePermissionController@editRole')->name('role.edit');
+    Route::put('/role-update/{id}', 'RolePermissionController@updateRole')->name('role.update');
+
+    Route::get('/permission-create', 'RolePermissionController@createPermission')->name('permission.create');
+    Route::post('/permission-store', 'RolePermissionController@storePermission')->name('permission.store');
+    Route::get('/permission-edit/{id}', 'RolePermissionController@editPermission')->name('permission.edit');
+    Route::put('/permission-update/{id}', 'RolePermissionController@updatePermission')->name('permission.update');
+
+    Route::get('assign-subject-to-class/{id}', 'GradeController@assignSubject')->name('class.assign.subject');
+    Route::post('assign-subject-to-class/{id}', 'GradeController@storeAssignedSubject')->name('store.class.assign.subject');
+
+  
+
 });
 
-Route::group(['middleware' => ['auth','role:Parent']], function () 
-{
-    Route::get('attendance/{attendance}', 'AttendanceController@show')->name('attendance.show');
+
+
+
+
+Route::get('/', function () {
+    return view('welcome');
 });
 
-Route::group(['middleware' => ['auth','role:Student']], function () {
-
-});

@@ -11,6 +11,7 @@ class Agreements extends Model
     protected $fillable = [
          'id',
         'title',
+        'name',
         'description',
         'file_url'
         

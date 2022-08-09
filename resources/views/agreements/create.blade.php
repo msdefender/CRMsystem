@@ -1,6 +1,25 @@
 @extends('layouts.app')
 
 @section('content')
+<head>
+    
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css">
+</head>
+<style type="text/css">
+    h2{
+        text-align: center;
+        font-size:22px;
+        margin-bottom:50px;
+    }
+    body{
+        background:#f2f2f2;
+    }
+    .section{
+        margin-top:150px;
+        padding:50px;
+        background:#fff;
+    }
+</style> 
     <div class="roles">
 
         <div class="flex items-center justify-between mb-6">
@@ -15,6 +34,16 @@
             </div>
         </div>
 
+        @if (count($errors) > 0)
+                        <div class="alert alert-danger">
+                            <strong>oops!</strong> Qandaydir xatolik.
+                            <ul>
+                                @foreach ($errors->all() as $error)
+                                    <li>{{ $error }}</li>
+                                @endforeach
+                            </ul>
+                        </div>
+                    @endif
         <div class="table w-full mt-8 bg-white rounded">
             <form action="{{ route('agreements.store') }}" method="POST" class="w-full max-w-lg px-6 py-12" enctype="multipart/form-data">
                 @csrf
@@ -36,7 +65,7 @@
                         </label>
                     </div>
                     <div class="md:w-2/3">
-                        <input name="file_url"   class="bg-gray-200 appearance-none border-2 border-gray-200 rounded w-full py-2 px-4 text-gray-700 leading-tight focus:outline-none focus:bg-white focus:border-blue-500" id="inline-full-name" type="file" value="">
+                        <input name="file"   class="bg-gray-200 appearance-none border-2 border-gray-200 rounded w-full py-2 px-4 text-gray-700 leading-tight focus:outline-none focus:bg-white focus:border-blue-500" id="inline-full-name" type="file" value="">
                     </div>
 
                 </div>

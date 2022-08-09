@@ -42,7 +42,7 @@ class AgreementsFController extends Controller
     {
         
         $input = $request->all();
-      //     dd($input);
+      //    dd($input);
         AgreementsF::create($input);
      
         return redirect()->route('agreementsF.index');
@@ -84,14 +84,17 @@ class AgreementsFController extends Controller
      */
     public function update(Request $request,$id)
     {
+        $request->validate([
+            'agreement_id' => 'required'
+            ]);
         $product = AgreementsF::findOrFail($id);
 
-       
+      // dd($request);
         $product->update([
             'agreement_id' => $request->agreement_id,
-            'file_name'  => $request->file_name,
-            'file_value'  => $request->file_value,
-       
+            'field_name'  => $request->field_name,
+            'field_value'  => $request->field_value,
+            'input_name'  => $request->input_name,
             
         ]);
 

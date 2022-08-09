@@ -16,9 +16,11 @@
         </div>
 
         <div class="table w-full mt-8 bg-white rounded">
-            <form action="{{ route('agreements.update',$product->id) }}" method="POST" class="w-full max-w-xl px-6 py-12" enctype="multipart/form-data">
-                @csrf
-                @method('PUT')
+            <form action="{{ route('agreements.update',$product->id)}}" method="post" class="w-full max-w-xl px-6 py-12" enctype="multipart/form-data">
+            @method('put')
+
+            @csrf  
+              
 
                 <div class="md:flex md:items-center mb-6">
                     <div class="md:w-1/3"></div>
@@ -33,7 +35,7 @@
                     <div class="md:w-2/3">
                         <input name="title" class="bg-gray-200 appearance-none border-2 border-gray-200 rounded w-full py-2 px-4 text-gray-700 leading-tight focus:outline-none focus:bg-white focus:border-blue-500" type="text" value="{{ $product->title }}">
                       
-                        @enderror
+                       
                     </div>
                 </div>
                 <div class="md:flex md:items-center mb-6">
@@ -43,7 +45,7 @@
                         </label>
                     </div>
                     <div class="md:w-2/3">
-                        <input name="file_url" class="bg-gray-200 appearance-none border-2 border-gray-200 rounded w-full py-2 px-4 text-gray-700 leading-tight focus:outline-none focus:bg-white focus:border-blue-500" type="file" >
+                        <input name="file" class="bg-gray-200 appearance-none border-2 border-gray-200 rounded w-full py-2 px-4 text-gray-700 leading-tight focus:outline-none focus:bg-white focus:border-blue-500" type="file" >
                       
                     </div>
                 </div>
@@ -55,7 +57,7 @@
                         </label>
                     </div>
                     <div class="md:w-2/3">
-                    <textarea name="description" rows="3" class="bg-gray-200 appearance-none border-2 border-gray-200 rounded w-full py-2 px-4 text-gray-700 leading-tight focus:outline-none focus:bg-white focus:border-blue-500" id="inline-full-name" >{{$product->description}}</textarea>
+                    <textarea name="description" rows="3" class="bg-gray-200 appearance-none border-2 border-gray-200 rounded w-full py-2 px-4 text-gray-700 leading-tight focus:outline-none focus:bg-white focus:border-blue-500" id="inline-full-name" >{{ $product->description }}</textarea>
                        
                     </div>
                 </div>
@@ -64,7 +66,7 @@
                     <div class="md:w-1/3"></div>
                     <div class="md:w-2/3">
                         <button class="shadow bg-blue-500 hover:bg-blue-400 focus:shadow-outline focus:outline-none text-white font-bold py-2 px-4 rounded" type="submit">
-                            Update Product
+                            Update Agreement
                         </button>
                     </div>
                 </div>
